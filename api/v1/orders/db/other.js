@@ -11,6 +11,17 @@ let orderManager = {
 				}
 			})
 		});
+	},
+
+	changeStatus: function(_id, status) {
+		return new Promise(function(resolve, reject) {
+			OrderSchema.update({_id : _id}, {$set: {status: status}}, function(error, modifyInfo) {
+				if(error) reject(error);
+				else {
+					resolve(modifyInfo);
+				}
+			})
+		});
 	}
 };
 

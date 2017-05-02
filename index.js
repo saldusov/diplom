@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
+const http = require('http').Server(app);
+var global = require('./api/global');
+global.io = require('socket.io').listen(http);
+
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const path = require('path');
 var routing = require("./api/routing");
 
 mongoose.connect('mongodb://localhost:27017/drone-cafe');
@@ -10,10 +15,16 @@ mongoose.connect('mongodb://localhost:27017/drone-cafe');
 app.use(bodyParser.json());                        
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded());
+
 app.use(express.static(__dirname + '/src/dist'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 app.use(routing);
+
+app.get("*", (req, res) => {
+    res.sendfile(path.resolve('src/dist/index.html'));
+});
 
 app.use(function(err, req, res, next) {
  
@@ -25,6 +36,7 @@ app.use(function(err, req, res, next) {
   res.status(code).send({message});
 });
 
-app.listen(3000, () => {
+
+http.listen(3000, () => {
   console.log("App run!");
 });

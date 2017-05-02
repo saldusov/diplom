@@ -2,6 +2,7 @@
 
 angular
   .module('droneCafeApp.kitchen', [
+    'btford.socket-io',
   	'ui.router',
   	'droneCafeApp.dishes'
   ])

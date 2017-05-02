@@ -13,7 +13,6 @@ function orderService($http, SessionService) {
 
   this.pay = (item) => {
   	let order = {
-  		status: 'ordered',
 			userId: SessionService.getUser()._id,
 			goodId: item.id
   	};
@@ -23,15 +22,16 @@ function orderService($http, SessionService) {
   }
 
   this.start = item => {
-    item.status = 'prepare';
-    return this.update(item);
+    return this.changeStatus(item._id, 'prepare');
   }
 
   this.ready = item => {
-    item.status = 'ready';
-    return this.update(item);
+    return this.changeStatus(item._id, 'ready');
   }
 
   this.update = item => $http.put(base_url + '/' + item._id, item)
     .then((response) => response.data);
+
+  this.changeStatus = (id, status) => $http.post(base_url + '/' + id + '/' + status)
+    .then((response) => response.data.status);
 }

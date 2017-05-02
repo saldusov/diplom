@@ -7,26 +7,18 @@ angular
 		controller: KitchenController
 	});
 
-KitchenController.$inject = ['OrderService'];
-function KitchenController(OrderService) {
+KitchenController.$inject = ['OrderService', 'SocketKitchen'];
+function KitchenController(OrderService, SocketKitchen) {
 	var ctrl = this;
 	ctrl.startDishes = [];
 	ctrl.readyDishes = [];
 
 	ctrl.onStart = function(item) {
-		OrderService.start(item)
-			.then(() => {
-				ctrl.reloadStartList();
-				ctrl.reloadPrepareList();
-			});
+		OrderService.start(item);
 	}
 
 	ctrl.onReady = function(item) {
-		OrderService.ready(item)
-			.then(() => {
-				ctrl.reloadStartList();
-				ctrl.reloadPrepareList();
-			});
+		OrderService.ready(item);
 	}
 
 	ctrl.reloadStartList = () => OrderService.get({status: 'ordered'})
@@ -37,4 +29,38 @@ function KitchenController(OrderService) {
 
 	ctrl.reloadStartList();
 	ctrl.reloadPrepareList();
+
+	SocketKitchen.on('add-order', function (data) {
+		ctrl.startDishes.push(data.order);
+	});
+
+	SocketKitchen.on('change-status', function (data) {
+		switch(data.status) {
+			case 'prepare':
+				ctrl.statusPrepareAction(data._id);
+				break;
+			case 'ready':
+				ctrl.statusReadyAction(data._id);
+				break;
+		}
+	});
+
+	ctrl.statusPrepareAction = (_id) => {
+		let found = ctrl.startDishes.find((item, index) => {
+			if(item._id == _id) {
+				ctrl.startDishes.splice(index, 1);
+				return true;
+			}
+		});
+
+		found.status = 'prepare';
+		ctrl.readyDishes.push(found);
+	};
+
+	ctrl.statusReadyAction = (_id) => ctrl.readyDishes.find((item, index) => {
+		if(item._id == _id) {
+			ctrl.readyDishes.splice(index, 1);
+			return true;
+		}
+	});
 }

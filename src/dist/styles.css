@@ -26,3 +26,7 @@
 .card-media {
   overflow: hidden;
 }
+
+.md-list-item-text.dishes-list {
+  text-overflow: none;
+}

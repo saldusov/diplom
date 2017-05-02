@@ -3,15 +3,23 @@
 angular.module('droneCafeApp.auth')
   .service('SessionService', sessionService);
 
-sessionService.$inject = ['$injector', '$sessionStorage', '$state', 'User'];
-function sessionService($injector, $sessionStorage, $state, User) {
+sessionService.$inject = ['$injector', '$sessionStorage', '$state', 'User', 'dbUsers'];
+function sessionService($injector, $sessionStorage, $state, User, dbUsers) {
+
+  let _user = User;
 
   this.login = function(user) {
-    $sessionStorage.$default({
-      user: user
-    });
+    dbUsers.login(user)
+      .then((item) => {
 
-    $state.transitionTo('home.client.detail');
+        _user.set(item);
+
+        $sessionStorage.$default({
+          userId: _user._id
+        });
+
+        $state.transitionTo('home.client.detail');
+      });
   }
 
   this.logout = function() {
@@ -28,9 +36,11 @@ function sessionService($injector, $sessionStorage, $state, User) {
       }
     } else {
       // вход с авторизацией
-      if ($sessionStorage.user) {
-        if(!User.check()) User.set($sessionStorage.user);
-        //$scope.$root.user = $sessionStorage.user;
+      if ($sessionStorage.userId) {
+        if(!User.check()) {
+          dbUsers.get($sessionStorage.userId)
+            .then( user => _user.set(user));
+        }
       } else {
         // если пользователь не авторизован - отправляем на страницу авторизации
         event.preventDefault();
@@ -40,6 +50,6 @@ function sessionService($injector, $sessionStorage, $state, User) {
   };
 
   this.getUser = function() {
-    return $sessionStorage.user;
+    return _user;
   }
 }

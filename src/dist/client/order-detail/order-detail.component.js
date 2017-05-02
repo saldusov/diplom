@@ -12,5 +12,4 @@ function OrderDetailController(User, OrderService, $timeout) {
 	var ctrl = this;
 	
 	ctrl.orders = OrderService.getOrders();
-	console.log(OrderService.getOrders());
 }

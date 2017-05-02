@@ -1,0 +1,12 @@
+.login-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.login-container {
+	max-width: 600px;
+}
+
+.login-form-container {
+	padding: 10px;
+}

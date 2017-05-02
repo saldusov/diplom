@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Drone cafe v1.0.0</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/bower_components/angular-material/angular-material.min.css">
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-timer/dist/angular-timer.min.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-aria/angular-aria.min.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-messages/angular-messages.min.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-animate/angular-animate.min.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-material/angular-material.min.js""></script>
+	<script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="/bower_components/ngstorage/ngStorage.min.js"></script>
+
+	<script type="text/javascript" src="/auth/auth.js"></script>
+	<script type="text/javascript" src="/auth/user.service.js"></script>
+	<script type="text/javascript" src="/auth/session.service.js"></script>
+	<script type="text/javascript" src="/auth/login/login.component.js"></script>
+	<link rel="stylesheet" type="text/css" href="/auth/login/login.component.css">
+
+	<script type="text/javascript" src="/shared/shared.module.js"></script>
+	<script type="text/javascript" src="/shared/toolbar/toolbar.component.js"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="/shared/toolbar/toolbar.component.css"> -->
+
+	<script type="text/javascript" src="/dishes/dishes.module.js"></script>
+	<script type="text/javascript" src="/dishes/dishes.service.js"></script>
+	<script type="text/javascript" src="/dishes/dishes-pay-list/dishes-pay-list.component.js"></script>
+
+	<script type="text/javascript" src="/kitchen/kitchen.js"></script>
+
+	<script type="text/javascript" src="/client/client.module.js"></script>
+	<script type="text/javascript" src="/client/client-page/client-page.component.js"></script>
+	<script type="text/javascript" src="/client/account-info/account-info.component.js"></script>
+	<script type="text/javascript" src="/client/order-detail/order-detail.component.js"></script>
+	<script type="text/javascript" src="/client/order-create/order-create.component.js"></script>
+	<script type="text/javascript" src="/client/order.service.js"></script>
+
+	<script type="text/javascript" src="/app.js"></script>
+	<script type="text/javascript" src="/app/app.component.js"></script>
+</head>
+<body ng-app="droneCafeApp">
+	<ui-view></ui-view>
+</body>
+</html>

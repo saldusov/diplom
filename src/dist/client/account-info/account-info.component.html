@@ -1,0 +1,8 @@
+<md-toolbar class="md-hue-2">
+  <div class="md-toolbar-tools">
+    <p flex>Здравствуйте, {{$ctrl.user.name}}</p>
+    <p>На вашем счету: {{$ctrl.user.balance}} GC.</p>
+
+    <md-button class="md-raised md-primary" ng-click="$ctrl.upBalance()">Пополнить</md-button>
+  </div>
+</md-toolbar>

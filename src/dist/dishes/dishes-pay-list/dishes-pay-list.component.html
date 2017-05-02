@@ -1,0 +1,38 @@
+<md-content class="md-padding" layout="row" layout-wrap>
+	<!-- <md-list-item class="md-2-line" ng-repeat="dish in $ctrl.dishes">
+ 		<img ng-src="{{dish.image}}?25" class="md-avatar" alt="{{dish.title}}"
+	       ng-if="dish.image"/>
+	  <div class="md-list-item-text">
+	    <h3> {{ dish.title }} </h3>
+	    <p> Цена: {{ dish.price }} GC. </p>
+	  </div>
+	  <md-button class="md-raised" ng-click="$ctrl.pay(dish)" aria-label="Заказать" ng-if="$ctrl.isPay(dish)">
+	    <md-icon class="materail-icons">add_shopping_cart</md-icon> Заказать 
+	  </md-button>
+	  <md-button class="md-raised md-primary" ng-click="$ctrl.upBalance(dish)" aria-label="Заказать" ng-if="!$ctrl.isPay(dish)">
+	    Пополнить на {{dish.price - $ctrl.balance}} GC.
+	  </md-button>
+	</md-list-item> -->
+	<div ng-repeat="dish in $ctrl.dishes" flex="33">
+		<md-card >
+	    <md-card-title>
+	      <md-card-title-text>
+	        <span class="md-headline">{{ dish.title }}</span>
+	        <span class="md-subhead">Цена: {{ dish.price }} GC.</span>
+	      </md-card-title-text>
+	      <md-card-title-media>
+	        <div class="md-media-lg card-media"><img ng-src="{{dish.image}}?150" alt="{{dish.title}}"
+		       ng-if="dish.image"/></div>
+	      </md-card-title-media>
+	    </md-card-title>
+	    <md-card-actions layout="row" layout-align="end center">
+	      <md-button class="md-raised" ng-click="$ctrl.pay(dish)" aria-label="Заказать" ng-if="$ctrl.isPay(dish)">
+			    <md-icon class="materail-icons">add_shopping_cart</md-icon> Заказать 
+			  </md-button>
+			  <md-button class="md-raised md-primary" ng-click="$ctrl.upBalance(dish)" aria-label="Заказать" ng-if="!$ctrl.isPay(dish)">
+			    Пополнить на {{dish.price - $ctrl.balance}} GC.
+			  </md-button>
+	    </md-card-actions>
+	  </md-card>
+	 </div>
+</md-content>

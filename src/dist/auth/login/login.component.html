@@ -1,0 +1,29 @@
+<div class="login-wrapper" ng-controller="LoginComponent as lc">
+	<section class="login-container">
+	  <md-toolbar>
+	    <div class="md-toolbar-tools">
+	      <h3>Добро пожаловать в Drone Cafe</h3>
+	    </div>
+	  </md-toolbar>
+	  <div class="md-whiteframe-z1 login-form-container">
+	   	<form novalidate name="loginForm" ng-submit="submit(user, loginForm.$valid)">
+		  <md-input-container class="md-block">
+		    <label>Ваше имя</label>
+		    <input name="name" ng-model="user.name" required>
+		    <div ng-messages="loginForm.name.$error" ng-show="loginForm.name.$error">
+		      <div ng-message="required">Введите ваше имя!</div>
+		    </div>
+		  </md-input-container>
+		  <md-input-container class="md-block">
+		    <label>Ваш Email</label>
+		    <input name="email" type="email" ng-model="user.email" required>
+		    <div ng-messages="loginForm.email.$error" ng-show="loginForm.email.$error">
+		      <div ng-message="required">Введите ваш email!</div>
+		      <div ng-message="email">Ваш email должен быть типа example@mail.ru!</div>
+		    </div>
+		  </md-input-container>
+      <md-button type="submit" class="md-raised md-primary">Войти</md-button>
+		</form>
+	  </div>
+	</section>
+</div>

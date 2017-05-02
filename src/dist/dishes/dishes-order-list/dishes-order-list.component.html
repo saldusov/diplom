@@ -1,0 +1,17 @@
+<md-content>
+	<md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders">
+ 		<img ng-src="{{order.dish.image}}?25" class="md-avatar" alt="{{order.dish.title}}"
+	       ng-if="order.dish.image"/>
+	  <div class="md-list-item-text order.dishes-list">
+	    <p> {{ order.dish.title }} </p>
+	  </div>
+	  <div class="md-secondary">
+	  <md-button class="md-primary" ng-click="$ctrl.start(order)" aria-label="Начать готовить" ng-if="$ctrl.view == 'start'">
+	    Начать готовить
+	  </md-button>
+	  <md-button class="md-primary" ng-click="$ctrl.success(order)" aria-label="Готово" ng-if="$ctrl.view == 'ready'">
+	    Готово
+	  </md-button>
+	  </div>
+	</md-list-item>
+</md-content>

@@ -10,17 +10,18 @@ angular
 		}
 	});
 
-OrderCreateController.$inject = ['User', 'OrderService'];
-function OrderCreateController(User, OrderService) {
+OrderCreateController.$inject = ['SessionService', 'OrderService'];
+function OrderCreateController(SessionService, OrderService) {
 	var ctrl = this;
 
-	ctrl.user = User;
+	ctrl.user = SessionService.getUser();
 
 	ctrl.upBalance = function(summ) {
 		ctrl.user.upBalance(summ);
 	}
 
 	ctrl.payDish = function(dish) {
+		console.log(ctrl.user);
 		ctrl.user.downBalance(dish.price);
 		OrderService.pay(dish);
 	}

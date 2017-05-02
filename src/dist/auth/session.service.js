@@ -11,14 +11,13 @@ function sessionService($injector, $sessionStorage, $state, User, dbUsers) {
   this.login = function(user) {
     dbUsers.login(user)
       .then((item) => {
-
         _user.set(item);
 
         $sessionStorage.$default({
           userId: _user._id
         });
 
-        $state.transitionTo('home.client.detail');
+        $state.go('home.client.detail');
       });
   }
 
@@ -37,7 +36,7 @@ function sessionService($injector, $sessionStorage, $state, User, dbUsers) {
     } else {
       // вход с авторизацией
       if ($sessionStorage.userId) {
-        if(!User.check()) {
+        if(!_user.check()) {
           dbUsers.get($sessionStorage.userId)
             .then( user => _user.set(user));
         }

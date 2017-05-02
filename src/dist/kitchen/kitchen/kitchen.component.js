@@ -7,20 +7,34 @@ angular
 		controller: KitchenController
 	});
 
-KitchenController.$inject = ['DishesService'];
-function KitchenController(DishesService) {
+KitchenController.$inject = ['OrderService'];
+function KitchenController(OrderService) {
 	var ctrl = this;
-
 	ctrl.startDishes = [];
-
-	DishesService.get()
-		.then( (response) => ctrl.startDishes = response.data );
+	ctrl.readyDishes = [];
 
 	ctrl.onStart = function(item) {
-		console.log('Start', item);
+		OrderService.start(item)
+			.then(() => {
+				ctrl.reloadStartList();
+				ctrl.reloadPrepareList();
+			});
 	}
 
-	ctrl.onSuccess = function(item) {
-		console.log('Success', item);
+	ctrl.onReady = function(item) {
+		OrderService.ready(item)
+			.then(() => {
+				ctrl.reloadStartList();
+				ctrl.reloadPrepareList();
+			});
 	}
+
+	ctrl.reloadStartList = () => OrderService.get({status: 'ordered'})
+		.then( (data) => ctrl.startDishes = data );
+
+	ctrl.reloadPrepareList = () => OrderService.get({status: 'prepare'})
+		.then( (data) => ctrl.readyDishes = data );
+
+	ctrl.reloadStartList();
+	ctrl.reloadPrepareList();
 }

@@ -2,19 +2,19 @@
 
 angular
 	.module('droneCafeApp.dishes')
-	.component('dishesList', {
-		templateUrl: '/dishes/dishes-list/dishes-list.component.html',
-		controller: DishesListController,
+	.component('dishesOrderList', {
+		templateUrl: '/dishes/dishes-order-list/dishes-order-list.component.html',
+		controller: DishesOrderListController,
 		bindings: {
-			dishes: "=",
+			orders: "=",
 			view: "=",
 			onStart: "&",
 			onSuccess: "&"
 		}
 	});
 
-DishesListController.$inject = [];
-function DishesListController() {
+DishesOrderListController.$inject = [];
+function DishesOrderListController() {
 	var ctrl = this;
 
 	ctrl.start = function(item) {

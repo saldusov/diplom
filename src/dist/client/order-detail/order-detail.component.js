@@ -7,9 +7,11 @@ angular
 		controller: OrderDetailController
 	});
 
-OrderDetailController.$inject = ['User', 'OrderService', '$timeout'];
-function OrderDetailController(User, OrderService, $timeout) {
+OrderDetailController.$inject = ['OrderService', 'SessionService'];
+function OrderDetailController(OrderService, SessionService) {
 	var ctrl = this;
-	
-	ctrl.orders = OrderService.getOrders();
+	ctrl.orders = [];
+
+	OrderService.get({userId: SessionService.getUser()._id})
+		.then((data) => ctrl.orders = data);
 }

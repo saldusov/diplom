@@ -5,17 +5,18 @@
 		<tr>
 			<th>Название блюда</th>
 			<th>Статус</th>
-			<th>Будет готов</th>
+			<th>Заказ сделан</th>
 		</tr>
-		<tr ng-repeat="dish in $ctrl.orders">
-			<td>{{ dish.title }}</td>
-			<td ng-switch="dish.status">
-				<span ng-switch-when="prepare">отовиться</span>
+		<tr ng-repeat="order in $ctrl.orders">
+			<td>{{ order.dish.title }}</td>
+			<td ng-switch="order.status">
+				<span ng-switch-when="prepare">Готовится</span>
 				<span ng-switch-when="ordered">Заказано</span>
-				<span ng-switch-when="closed">Доставлено</span>
-				<span ng-switch-when="error">Ошибка</span>
+				<span ng-switch-when="ready">Доставляется</span>
+				<span ng-switch-when="closed">Подано</span>
+				<span ng-switch-when="error">Возникли сложности</span>
 			</td>
-			<td>{{ dish.dateSuccess | date: "mediumTime" }}</td>
+			<td>{{ order.createdAt | date: "mediumTime" }}</td>
 		</tr>
 	</table>
 </md-content>

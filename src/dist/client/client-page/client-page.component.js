@@ -7,12 +7,12 @@ angular
 		controller: ClientPageController
 	});
 
-ClientPageController.$inject = ['User'];
-function ClientPageController(User) {
+ClientPageController.$inject = ['SessionService'];
+function ClientPageController(SessionService) {
 	var ctrl = this;
 
-	ctrl.user = User;
+	ctrl.user = SessionService.getUser();
 	ctrl.onUpBalance = function() {
-		User.upBalance(100);
+		ctrl.user.upBalance(100);
 	}
 }

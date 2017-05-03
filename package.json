@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor e2e-tests/protractor.conf.js"
   },
   "author": "Viktor Saldusov",
   "license": "ISC",
@@ -23,7 +26,9 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "jasmine-core": "^2.6.1",
     "mocha": "^3.3.0",
+    "protractor": "^5.1.1",
     "request": "^2.81.0"
   }
 }

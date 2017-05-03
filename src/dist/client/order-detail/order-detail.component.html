@@ -1,4 +1,4 @@
-<md-button class="md-raised md-warn" ui-sref="home.client.addorder">Добавить</md-button>
+<md-button class="md-raised md-warn add-order-button" ui-sref="home.client.addorder">Добавить</md-button>
 <md-content>
 	<md-subheader class="md-no-sticky">Ваш заказ</md-subheader>
 	<md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders">
@@ -8,7 +8,7 @@
 	  	<h4>{{ order.dish.title }}</h4>
 	    <p>Заказано в {{ order.createdAt | date: "shortTime" }}</p>
 	  </div>
-	  <div class="md-secondary" ng-switch="order.status">
+	  <div class="md-secondary" ng-switch="order.status" class="status-order">
 		<span ng-switch-when="prepare">Готовится</span>
 		<span ng-switch-when="ordered">Заказано</span>
 		<span ng-switch-when="ready">Доставляется</span>

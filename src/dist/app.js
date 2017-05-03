@@ -12,8 +12,8 @@ angular
 	.config(configApp)
 	.run(runApp);
 
-configApp.$inject = ["$stateProvider", "$urlRouterProvider"];
-function configApp($stateProvider, $urlRouterProvider) {
+configApp.$inject = ["$stateProvider", "$urlRouterProvider", "$locationProvider"];
+function configApp($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
     .state('home', {
       url: '/',
@@ -22,6 +22,7 @@ function configApp($stateProvider, $urlRouterProvider) {
     });
 
   $urlRouterProvider.when('', '/');
+  $locationProvider.html5Mode(true);
 }
 
 runApp.$inject = ['$rootScope', '$state', '$stateParams', 'SessionService'];

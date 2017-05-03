@@ -15,7 +15,7 @@ function configAuthModule($stateProvider, $urlRouterProvider) {
       template: '<ui-view>'
     })
     .state('auth.login', {
-      url: '/login',
+      url: '/login/',
       templateUrl: 'auth/login/login.component.html', 
       data: {
         'noLogin': true

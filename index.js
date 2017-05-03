@@ -11,8 +11,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 var routing = require("./api/routing");
 
-
-let connect_uri = 'mongodb://admin:admin@ds129641.mlab.com:29641/drone-cafe';//process.env.MONGOLAB_URI || 'mongodb://localhost:27017/drone-cafe';
+//let connect_uri = process.env.MONGO_URI || 'mongodb://admin:admin@ds129641.mlab.com:29641/drone-cafe';
+let connect_uri = process.env.MONGO_URI || 'mongodb://localhost:27017/drone-cafe';
 mongoose.connect(connect_uri);
 
 // parse application/json
@@ -45,3 +45,5 @@ app.use(function(err, req, res, next) {
 http.listen(process.env.PORT || 5000, () => {
   console.log("App run!");
 });
+
+module.exports = http;

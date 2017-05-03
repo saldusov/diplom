@@ -26,7 +26,7 @@ app.post('/', middleware.parseData, function(req, res, next){
 
 app.post('/:id/:status', function(req, res, next) {
 	indexFunction.changeStatusById(req.params.id, req.params.status)
-		.then((order) => res.status(200).json({status: 'ok'}))
+		.then((order) => res.status(200).json({status: 'ok', order: order}))
 		.catch((error) => res.status(400).json({error}));
 });
 

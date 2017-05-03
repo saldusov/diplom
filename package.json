@@ -4,7 +4,7 @@
   "description": "diplom",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "postinstall": "bower install"
   },
   "author": "Viktor Saldusov",
@@ -20,5 +20,10 @@
     "path": "^0.12.7",
     "serve-favicon": "^2.4.2",
     "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "request": "^2.81.0"
   }
 }

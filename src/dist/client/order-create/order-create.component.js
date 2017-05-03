@@ -21,7 +21,6 @@ function OrderCreateController(SessionService, OrderService) {
 	}
 
 	ctrl.payDish = function(dish) {
-		console.log(ctrl.user);
 		ctrl.user.downBalance(dish.price);
 		OrderService.pay(dish);
 	}

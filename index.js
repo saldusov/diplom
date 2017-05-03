@@ -42,6 +42,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-http.listen(8080, () => {
+http.listen(process.env.PORT || 5000, () => {
   console.log("App run!");
 });

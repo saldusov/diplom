@@ -7,11 +7,19 @@ angular
 		controller: OrderDetailController
 	});
 
-OrderDetailController.$inject = ['OrderService', 'SessionService'];
-function OrderDetailController(OrderService, SessionService) {
+OrderDetailController.$inject = ['OrderService', 'SessionService', 'SocketOrder'];
+function OrderDetailController(OrderService, SessionService, SocketOrder) {
 	var ctrl = this;
 	ctrl.orders = [];
 
-	OrderService.get({userId: SessionService.getUser()._id})
-		.then((data) => ctrl.orders = data);
+	SocketOrder.on('change-status', function(data) {
+		ctrl.reloadOrders();
+	});
+
+	ctrl.reloadOrders = () => {
+		OrderService.get({userId: SessionService.getUser()._id})
+			.then((data) => ctrl.orders = data);
+	}
+
+	ctrl.reloadOrders();
 }

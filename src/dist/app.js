@@ -6,7 +6,6 @@ angular
     'droneCafeApp.client',
 		'droneCafeApp.kitchen',
 		'droneCafeApp.shared',
-		'ngStorage',
 		'ngMaterial',
 		'ngMessages'
 	])

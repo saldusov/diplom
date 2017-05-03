@@ -4,6 +4,7 @@ let app = module.exports = express();
 const dbCrud = require('../db/crud');
 const dbOther = require('../db/other');
 var nspKitchen = require('../socket/kitchen');
+var nspOrder = require('../socket/order');
 
 module.exports = {
 	getOrders: (matchParams) => dbOther.get(matchParams),
@@ -27,9 +28,10 @@ module.exports = {
 	changeStatusById: (id, status) => {
 		if(!checkOrderStatus(status)) return Promise.reject("not valid status");
 		return dbCrud.update(id, {status})
-			.then((modifyInfo) => {
-				eventChangeStatusOrder({_id: id, status: status});
-				return modifyInfo;
+			.then((modifyInfo) => dbCrud.read(id))
+			.then((order) => {
+				eventChangeStatusOrder(order);
+				return order;
 			});
 	}
 }
@@ -44,4 +46,5 @@ function eventCreateOrder(order) {
 
 function eventChangeStatusOrder(data) {
 	nspKitchen.emit('change-status', data);
+	nspOrder.to(data.userId).emit('change-status', data);
 }

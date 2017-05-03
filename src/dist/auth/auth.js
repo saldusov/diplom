@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('droneCafeApp.auth', [
-    'ui.router'
+    'ui.router',
+    'swxSessionStorage'
   ])
   .config(configAuthModule);
 

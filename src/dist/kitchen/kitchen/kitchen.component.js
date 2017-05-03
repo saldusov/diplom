@@ -31,36 +31,18 @@ function KitchenController(OrderService, SocketKitchen) {
 	ctrl.reloadPrepareList();
 
 	SocketKitchen.on('add-order', function (data) {
-		ctrl.startDishes.push(data.order);
+		ctrl.reloadStartList();
 	});
 
 	SocketKitchen.on('change-status', function (data) {
 		switch(data.status) {
 			case 'prepare':
-				ctrl.statusPrepareAction(data._id);
+				ctrl.reloadStartList();
+				ctrl.reloadPrepareList();
 				break;
 			case 'ready':
-				ctrl.statusReadyAction(data._id);
+				ctrl.reloadPrepareList();
 				break;
-		}
-	});
-
-	ctrl.statusPrepareAction = (_id) => {
-		let found = ctrl.startDishes.find((item, index) => {
-			if(item._id == _id) {
-				ctrl.startDishes.splice(index, 1);
-				return true;
-			}
-		});
-
-		found.status = 'prepare';
-		ctrl.readyDishes.push(found);
-	};
-
-	ctrl.statusReadyAction = (_id) => ctrl.readyDishes.find((item, index) => {
-		if(item._id == _id) {
-			ctrl.readyDishes.splice(index, 1);
-			return true;
 		}
 	});
 }

@@ -12,17 +12,15 @@ function sessionService($injector, $sessionStorage, $state, User, dbUsers) {
     dbUsers.login(user)
       .then((item) => {
         _user.set(item);
-
-        $sessionStorage.$default({
-          userId: _user._id
-        });
+       
+        $sessionStorage.put('userid', _user._id);
 
         $state.go('home.client.detail');
       });
   }
 
   this.logout = function() {
-    $sessionStorage.$reset();
+    $sessionStorage.empty();
   }
 
   this.checkAccess = function(event, toState, toParams, fromState, fromParams) {
@@ -35,9 +33,10 @@ function sessionService($injector, $sessionStorage, $state, User, dbUsers) {
       }
     } else {
       // вход с авторизацией
-      if ($sessionStorage.userId) {
+        //console.log($sessionStorage);
+      if ($sessionStorage.get('userid')) {
         if(!_user.check()) {
-          dbUsers.get($sessionStorage.userId)
+          dbUsers.get($sessionStorage.get('userid'))
             .then( user => _user.set(user));
         }
       } else {

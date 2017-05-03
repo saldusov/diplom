@@ -10,6 +10,7 @@
   "author": "Viktor Saldusov",
   "license": "ISC",
   "dependencies": {
+    "angular-swx-session-storage": "^1.0.0",
     "body-parser": "^1.17.1",
     "bower": "^1.8.0",
     "ejs": "^2.5.6",

@@ -1,0 +1,7 @@
+{
+	"name": "Drone cafe application",
+	"description": "NodeJs + AngularJS + MongoDB",
+	"repository": "https://github.com/saldusov/diplom",
+	"keywords": ["node", "angular", "mongo"],
+	"image": "heroku/nodejs"
+}

@@ -4,6 +4,8 @@ const http = require('http').Server(app);
 var global = require('./api/global');
 global.io = require('socket.io').listen(http);
 
+const favicon = require('serve-favicon');
+
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const path = require('path');
@@ -15,6 +17,7 @@ mongoose.connect('mongodb://localhost:27017/drone-cafe');
 app.use(bodyParser.json());                        
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded());
+app.use(favicon(__dirname + '/src/favicon.ico'));
 
 app.use(express.static(__dirname + '/src/dist'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
@@ -37,6 +40,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-http.listen(3000, () => {
+http.listen(80, () => {
   console.log("App run!");
 });

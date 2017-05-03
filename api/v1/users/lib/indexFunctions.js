@@ -20,7 +20,7 @@ module.exports = {
 	},
 
 	updateUser: (id, data) => {
-		dbCrud.update(id, data)
+		return dbCrud.update(id, data)
 			.then((modifyInfo) => dbCrud.read(id));
 	}
 }

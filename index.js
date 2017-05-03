@@ -11,7 +11,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 var routing = require("./api/routing");
 
-mongoose.connect('mongodb://localhost:27017/drone-cafe');
+
+let connect_uri = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/drone-cafe';
+mongoose.connect(connect_uri);
 
 // parse application/json
 app.use(bodyParser.json());                        

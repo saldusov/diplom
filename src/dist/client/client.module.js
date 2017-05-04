@@ -2,6 +2,7 @@
 
 angular
 	.module('droneCafeApp.client', [
+		'droneCafeApp.shared',
     	'droneCafeApp.dishes',
     	'timer'
     ])

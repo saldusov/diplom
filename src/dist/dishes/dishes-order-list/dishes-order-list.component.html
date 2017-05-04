@@ -4,12 +4,13 @@
 	       ng-if="order.dish.image"/>
 	  <div class="md-list-item-text order.dishes-list">
 	    <p> {{ order.dish.title }} </p>
+	    <p ng-if="$ctrl.view == 'ready'">Блюдо готовиться <timer ng-if="order.status == 'prepare'" interval="1000" start-time="order.prepareDate">{{hours}} ч. {{minutes}} мин. {{seconds}} сек.</timer><time-viewer ng-if="order.status != 'prepare'" start-time="order.prepareDate" end-time="order.readyDate"/></p>
 	  </div>
 	  <div class="md-secondary">
 	  <md-button class="md-primary" ng-click="$ctrl.start(order)" aria-label="Начать готовить" ng-if="$ctrl.view == 'start'">
 	    Начать готовить
 	  </md-button>
-	  <md-button class="md-primary" ng-click="$ctrl.success(order)" aria-label="Готово" ng-if="$ctrl.view == 'ready'">
+	  <md-button class="md-primary" ng-click="$ctrl.success(order)" aria-label="Готово" ng-if="$ctrl.view == 'ready' && order.status == 'prepare'">
 	    Готово
 	  </md-button>
 	  </div>

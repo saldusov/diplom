@@ -1,4 +1,4 @@
 'use strict';
 
 angular
-	.module('droneCafeApp.dishes', ['ngResource']);
+	.module('droneCafeApp.dishes', ['ngResource', 'timer']);

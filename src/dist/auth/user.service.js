@@ -11,11 +11,11 @@ function userService($http, dbUsers) {
   this.balance = 0;
 
   this.upBalance = (number) => {
-    updateBalance(this.balance + number);
+    updateBalance(Math.abs(this.balance + number).toFixed(2));
   };
 
   this.downBalance = (number) => {
-    updateBalance(this.balance - number);
+    updateBalance(Math.abs(this.balance - number).toFixed(2));
   };
 
   this.set = (params) => {

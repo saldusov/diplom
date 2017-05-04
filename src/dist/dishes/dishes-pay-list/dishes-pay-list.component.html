@@ -16,7 +16,7 @@
 			    <md-icon class="materail-icons">add_shopping_cart</md-icon> Заказать 
 			  </md-button>
 			  <md-button class="md-raised md-primary" ng-click="$ctrl.upBalance(dish)" aria-label="Заказать" ng-if="!$ctrl.isPay(dish)">
-			    Пополнить на {{dish.price - $ctrl.balance}} GC.
+			    Пополнить на {{(dish.price - $ctrl.balance).toFixed(2)}} GC.
 			  </md-button>
 	    </md-card-actions>
 	  </md-card>

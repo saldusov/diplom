@@ -37,7 +37,13 @@ function sessionService($injector, $sessionStorage, $state, User, dbUsers) {
       if ($sessionStorage.get('userid')) {
         if(!_user.check()) {
           dbUsers.get($sessionStorage.get('userid'))
-            .then( user => _user.set(user));
+            .then( user => {
+              if(user) _user.set(user);
+              else {
+                this.logout();
+                $scope.$state.go('auth.login');
+              }
+            });
         }
       } else {
         // если пользователь не авторизован - отправляем на страницу авторизации

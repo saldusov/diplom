@@ -12,7 +12,7 @@ angular
 function configKitchen($stateProvider) {
     let kitchenState = {
       name: 'home.kitchen',
-      url: 'kitchen',
+      url: 'kitchen/',
       template: '<kitchen/>',
       data: {
         'noLogin': true

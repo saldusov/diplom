@@ -29,6 +29,10 @@ function orderService($http, SessionService) {
     return this.changeStatus(item._id, 'ready');
   }
 
+  this.cancel = item => {
+    return this.changeStatus(item._id, 'canceled');
+  }
+
   this.update = item => $http.put(base_url + '/' + item._id, item)
     .then((response) => response.data);
 

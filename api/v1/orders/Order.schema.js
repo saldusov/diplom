@@ -9,6 +9,8 @@ let OrderSchema = new Schema({
 		type: String,
 		default: 'ordered'
 	},
+	prepareDate: Date,
+	readyDate: Date,
 	userId: Schema.ObjectId
 },
 {

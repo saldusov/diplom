@@ -6,13 +6,23 @@
 	       ng-if="order.dish.image"/>
 	  <div class="md-list-item-text order.dishes-list">
 	  	<h4>{{ order.dish.title }}</h4>
-	    <p>Заказано в {{ order.createdAt | date: "shortTime" }}</p>
+	    <p>С момента заказа прошло <timer ng-if="$ctrl.isOpenOrder(order)" interval="1000" start-time="order.createdAt">{{hours}} ч. {{minutes}} мин. {{seconds}} сек.</timer><time-viewer ng-if="!$ctrl.isOpenOrder(order)" start-time="order.createdAt" end-time="order.updatedAt">{{test1}} : {{test2}}</time-viewer></p>
+	    <p ng-if="order.status == 'error'">
+	    	<md-button ng-if="$ctrl.isPay(order)" class="md-primary md-raised" ng-click="$ctrl.onRepeat(order)" aria-label="Повторить со скидкой 5%">
+			    Повторить со скидкой 5%
+			</md-button>
+			<span class="md-warn" ng-if="!$ctrl.isPay(order)" style="color: red;">Для заказа со скидкой не хватает {{$ctrl.getDiff(order)}} GC.</span> 
+			<md-button class="md-warn" ng-click="$ctrl.onCancel(order)" aria-label="Отменить">
+			    Отменить
+			</md-button>
+		</p>
 	  </div>
 	  <div class="md-secondary" ng-switch="order.status" class="status-order">
 		<span ng-switch-when="prepare">Готовится</span>
 		<span ng-switch-when="ordered">Заказано</span>
 		<span ng-switch-when="ready">Доставляется</span>
 		<span ng-switch-when="closed">Подано</span>
+		<span ng-switch-when="canceled">Отменен</span>
 		<span ng-switch-when="error">Возникли сложности</span>
 	  </div>
 	</md-list-item>

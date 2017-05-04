@@ -23,13 +23,22 @@ var indexFunction = {
 	},
 
 	updateOrder: (id, data) => {
+		setDateByStatus(data);
+
 		return dbCrud.update(id, data)
-			.then((modifyInfo) => dbCrud.read(id));
+			.then((modifyInfo) => {
+				if(data.status == 'ordered') {
+					eventCreateOrder(data);
+				}
+				return dbCrud.read(id)
+			});
 	},
 
 	changeStatusById: (id, status) => {
 		if(!checkOrderStatus(status)) return Promise.reject("not valid status");
-		return dbCrud.update(id, {status})
+		var data = {status};
+		setDateByStatus(data);
+		return dbCrud.update(id, data)
 			.then((modifyInfo) => dbCrud.read(id))
 			.then((order) => {
 				eventChangeStatusOrder(order);
@@ -42,7 +51,7 @@ var indexFunction = {
 module.exports = indexFunction;
 
 function checkOrderStatus(status) {
-	return ['prepare', 'ready', 'closed', 'error'].indexOf(status) !== -1 ? true : false;
+	return ['prepare', 'ready', 'closed', 'error', 'canceled'].indexOf(status) !== -1 ? true : false;
 }
 
 function eventCreateOrder(order) {
@@ -69,4 +78,14 @@ function successDelivery(id) {
 function errorDelivary(id) {
 	return indexFunction.updateOrder(id, {status: 'error'})
 		.then((order) => eventChangeStatusOrder(order))
+}
+
+function setDateByStatus(order) {
+	if(order.status == 'ordered') {
+		order.readyDate = null;
+		order.prepareDate = null;
+	}
+
+	if(order.status == 'prepare') order.prepareDate = new Date();
+	if(order.status == 'ready') order.readyDate = new Date();
 }

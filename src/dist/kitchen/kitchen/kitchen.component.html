@@ -1,4 +1,10 @@
 <div layout="row">
-  <div flex><dishes-order-list orders="$ctrl.startDishes" view="'start'" on-start="$ctrl.onStart(item)"/></div>
-  <div flex><dishes-order-list orders="$ctrl.readyDishes" view="'ready'" on-success="$ctrl.onReady(item)"/></div>
+ 	<div flex>
+	  <md-subheader class="md-no-sticky">Новые заказы</md-subheader>
+	  <dishes-order-list orders="$ctrl.startDishes" view="'start'" on-start="$ctrl.onStart(item)"/>
+	</div>
+	<div flex>
+		<md-subheader class="md-no-sticky">Готовятся (-готовы)</md-subheader>
+		<dishes-order-list orders="$ctrl.readyDishes" view="'ready'" on-success="$ctrl.onReady(item)"/>
+	</div>
 </div>

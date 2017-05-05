@@ -6,7 +6,7 @@
 	       ng-if="order.dish.image"/>
 	  <div class="md-list-item-text order.dishes-list">
 	  	<h4>{{ order.dish.title }}</h4>
-	    <p>С момента заказа прошло <timer ng-if="$ctrl.isOpenOrder(order)" interval="1000" start-time="order.createdAt">{{hours}} ч. {{minutes}} мин. {{seconds}} сек.</timer><time-viewer ng-if="!$ctrl.isOpenOrder(order)" start-time="order.createdAt" end-time="order.updatedAt">{{test1}} : {{test2}}</time-viewer></p>
+	    <p>С момента заказа прошло <time-viewer start-time="order.createdAt" end-time="order.updatedAt" is-stoped="!$ctrl.isOpenOrder(order)"/></p>
 	    <p ng-if="order.status == 'error'">
 	    	<md-button ng-if="$ctrl.isPay(order)" class="md-primary md-raised" ng-click="$ctrl.onRepeat(order)" aria-label="Повторить со скидкой 5%">
 			    Повторить со скидкой 5%

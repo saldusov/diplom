@@ -5,7 +5,7 @@ const indexFunction = require('./lib/indexFunctions');
 const middleware = require('./middleware/parse');
 
 app.get('/', middleware.parseQuery, function(req, res, next) {
-	indexFunction.getOrders(req.mongo.match)
+	indexFunction.getOrders(req.mongo)
 		.then(foundItems => res.json(foundItems))
 		.catch(error => res.status(500).json({error}));
 });

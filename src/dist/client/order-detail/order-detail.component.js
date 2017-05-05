@@ -26,7 +26,7 @@ function OrderDetailController(OrderService, SessionService, SocketOrder) {
 	ctrl.getDiff = order => (getPriceDiscount(order.dish.price, 0.05) - SessionService.getUser().balance).toFixed(2);
 
 	ctrl.isOpenOrder = (order) => {
-		return !(['closed', 'canceled'].indexOf(order.status) >= 0);
+		return (['closed', 'canceled'].indexOf(order.status) === -1);
 	}
 
 	ctrl.onCancel = (order) => {

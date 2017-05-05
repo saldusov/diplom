@@ -15,12 +15,17 @@ module.exports = {
 		req.mongo = {
 			match: {}
 		};
+		req.mongo.sort = {sort: {createdAt: -1}};
 
 		if(query.userId || query.status) {
 			req.mongo.match.$and = [];
 			if(query.userId) req.mongo.match.$and.push({ userId: query.userId });
 			if(query.status && query.no === undefined) req.mongo.match.$and.push({ status: query.status });
 			if(query.status && query.no) req.mongo.match.$and.push({ status: { $ne: query.status } });
+		}
+
+		if(query.sort == 'prepareDate') {
+			req.mongo.sort = {sort: {prepareDate: -1}}
 		}
 
 		next();

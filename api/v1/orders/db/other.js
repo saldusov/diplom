@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const OrderSchema = require('../Order.schema');
 
 let orderManager = {
-	get: function(match) {
+	get: function(params) {
 		return new Promise(function(resolve, reject) {
-			OrderSchema.find(match, [], {sort: {createdAt: -1}}, function(error, foundItems) {
+			OrderSchema.find(params.match, [], params.sort, function(error, foundItems) {
 				if(error) reject(error);
 				else {
 					resolve(foundItems);

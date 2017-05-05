@@ -24,7 +24,7 @@ function KitchenController(OrderService, SocketKitchen) {
 	ctrl.reloadStartList = () => OrderService.get({status: 'ordered'})
 		.then( (data) => ctrl.startDishes = data );
 
-	ctrl.reloadPrepareList = () => OrderService.get({status: 'ordered', no: true})
+	ctrl.reloadPrepareList = () => OrderService.get({status: 'ordered', no: true, sort: 'prepareDate'})
 		.then( (data) => ctrl.readyDishes = data );
 
 	ctrl.reloadStartList();
